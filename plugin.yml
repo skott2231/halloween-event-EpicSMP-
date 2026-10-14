@@ -1,0 +1,36 @@
+name: HalloweenEvent
+version: '1.0.0'
+main: com.epicsmp.halloween.HalloweenPlugin
+api-version: '1.21'
+author: EPIC SMP
+description: Halloween event - hand in carved pumpkins, earn points, keys and rewards.
+softdepend: [PlaceholderAPI]
+
+commands:
+  halloween:
+    description: Halloween event main command
+    usage: /<command> [info|sell|sellall|top|shop|daily|goal|points]
+    aliases: [hw]
+
+permissions:
+  halloween.use:
+    description: Use the basic Halloween commands (info, top, goal, points)
+    default: true
+  halloween.sell:
+    description: Use /halloween sell
+    default: true
+  halloween.sellall:
+    description: Use /halloween sellall
+    default: true
+  halloween.shop:
+    description: Use /halloween shop
+    default: true
+  halloween.daily:
+    description: Use /halloween daily
+    default: true
+  halloween.info.others:
+    description: Look at the stats of other players
+    default: op
+  halloween.admin:
+    description: Use /halloween admin ...
+    default: op

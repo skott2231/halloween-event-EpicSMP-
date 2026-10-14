@@ -1,0 +1,175 @@
+# ╔════════════════════════════════════════════════════════════════════╗
+# ║           🎃   H A L L O W E E N   M E S S A G E S   🎃             ║
+# ║                      messages.yml  ·  v1.0.0                       ║
+# ╚════════════════════════════════════════════════════════════════════╝
+#
+#  Every text the players see is in this file. Change it freely.
+#
+#   - Colors: &6 and hex colors like &#FF7518 work everywhere.
+#   - {something} is a placeholder that the plugin fills in.
+#     Keep the placeholders that are already in a line, or remove them
+#     if you do not need them.
+#   - {prefix} is replaced by the "prefix" line below.
+#   - A line with only '' shows nothing.
+#   - A line that starts with a single quote must also END with one.
+#     To write a ' inside a text, type it twice: ''
+#   - After editing run  /halloween admin reload
+# ───────────────────────────────────────────────────────────────────
+
+prefix: '&#FF7518&lHALLOWEEN &8» &7'
+
+# ═══════════════════ general ═══════════════════
+no-permission: '{prefix}&cYou do not have permission for that.'
+players-only: '{prefix}&cOnly players can use this command.'
+unknown-command: '{prefix}&cUnknown command. Use &f/{label} help&c.'
+event-inactive: '{prefix}&cThe Halloween event is not running right now.'
+player-not-found: '{prefix}&cNo Halloween player called &f{name}&c.'
+invalid-number: '{prefix}&c"{value}" is not a valid number.'
+
+# ═══════════════════ small words ═══════════════════
+status-active: '&aRunning'
+status-inactive: '&cClosed'
+no-end: 'no end date'
+ended: 'ended'
+none: '-'
+unlimited: 'unlimited'
+# {d} = days, {h} = hours, {m} = minutes
+time-format: '{d}d {h}h {m}m'
+
+# One piece of the progress bar (the bar is built from many of these).
+bar-filled: '&#FF7518█'
+bar-empty: '&8█'
+
+# ═══════════════════ /halloween help ═══════════════════
+help-header: '&8&m          &r &#FF7518&lHALLOWEEN &7commands &8&m          '
+help-info: ' &#FF7518/halloween info &8- &7your points, progress and rank'
+help-sell: ' &#FF7518/halloween sell &8- &7hand in carved pumpkins'
+help-sellall: ' &#FF7518/halloween sellall &8- &7hand in every pumpkin in your inventory'
+help-top: ' &#FF7518/halloween top &8- &7the leaderboard'
+help-shop: ' &#FF7518/halloween shop &8- &7spend your Halloween points'
+help-daily: ' &#FF7518/halloween daily &8- &7your daily bonus'
+help-goal: ' &#FF7518/halloween goal &8- &7community goal progress'
+help-points: ' &#FF7518/halloween points &8- &7show your points'
+help-admin: ' &c/halloween admin &8- &7staff tools'
+
+# ═══════════════════ handing in pumpkins ═══════════════════
+# Placeholders: {amount} items handed in, {gained} points gained,
+# {points} total points, {delivered} lifetime pumpkins, {progress}/{every}
+# progress to the next key, {next_key} pumpkins missing, {bar} progress bar
+delivered:
+  - ''
+  - '{prefix}You handed in &#FF7518{amount} &7pumpkin(s) and got &#FF7518+{gained} &7Halloween point(s)!'
+  - '{prefix}Next key&8: {bar} &8(&f{progress}&8/&f{every}&8)'
+  - ''
+
+# Placeholders: {amount} number of keys
+key-received: '{prefix}&#FF7518&lKEY! &7You earned &#FF7518{amount} &7Halloween key(s)!'
+key-broadcast: '{prefix}&#FF7518{player} &7earned a &#FF7518Halloween key &7by handing in pumpkins! &8(&f{delivered} &7total&8)'
+key-title: '&#FF7518&lHALLOWEEN KEY'
+key-subtitle: '&7You earned &#FF7518{amount} &7key(s)!'
+
+sell-nothing: '{prefix}&cThere are no carved pumpkins in the menu.'
+sell-returned: '{prefix}&7Your other items were given back.'
+sellall-nothing: '{prefix}&cYou have no carved pumpkins in your inventory.'
+sellall-disabled: '{prefix}&c/halloween sellall is turned off.'
+
+# ═══════════════════ the hand-in menu ═══════════════════
+gui-sell-title: '&#FF7518&lHand in pumpkins'
+gui-filler-name: ' '
+gui-confirm-name: '&a&lCONFIRM'
+gui-confirm-lore:
+  - '&7Click to hand in all'
+  - '&7carved pumpkins in this menu.'
+gui-cancel-name: '&c&lCANCEL'
+gui-cancel-lore:
+  - '&7Click to close the menu.'
+  - '&7You get all items back.'
+gui-info-name: '&#FF7518&lYour hand-in'
+# {items} pumpkins in the menu, {points} points you will get,
+# {keys} keys you will earn, {total} lifetime pumpkins after the hand-in
+gui-info-lore:
+  - '&7Pumpkins&8: &f{items}'
+  - '&7Points you get&8: &#FF7518+{points}'
+  - '&7Keys you earn&8: &#FF7518{keys}'
+  - ''
+  - '&7Lifetime after hand-in&8: &f{total}'
+
+# ═══════════════════ /halloween info ═══════════════════
+info:
+  - '&8&m          &r &#FF7518&lHALLOWEEN EVENT &8&m          '
+  - ' &7Status&8: {status} &8(&7{time_left}&8)'
+  - ' &7Player&8: &f{player}'
+  - ' &7Halloween points&8: &#FF7518{points}'
+  - ' &7Pumpkins handed in&8: &#FF7518{delivered}'
+  - ' &7Keys earned&8: &#FF7518{keys}'
+  - ' &7Next key&8: {bar} &8(&f{progress}&8/&f{every}&8)'
+  - ' &7Pumpkins until next key&8: &#FF7518{next_key}'
+  - ' &7Leaderboard rank&8: &#FF7518#{rank}'
+  - ' &7Whole server&8: &#FF7518{global} &7pumpkins'
+
+points: '{prefix}You have &#FF7518{points} &7Halloween points. Spend them with &#FF7518/halloween shop&7.'
+
+# ═══════════════════ /halloween top ═══════════════════
+top-header: '&8&m        &r &#FF7518&lTOP {size} &7pumpkin collectors &8&m        '
+# {pos} place, {player} name, {delivered} pumpkins, {points} points
+top-line: ' &#FF7518#{pos} &f{player} &8- &#FF7518{delivered} &7pumpkins'
+top-empty: ' &7Nobody has handed in a pumpkin yet. Be the first!'
+
+# ═══════════════════ /halloween goal ═══════════════════
+goal:
+  - '&8&m          &r &#FF7518&lCOMMUNITY GOAL &8&m          '
+  - ' &7The whole server handed in &#FF7518{global} &7pumpkins.'
+  - ' &7Next goal&8: &#FF7518{goal_next}'
+  - ' {goal_bar}'
+
+# ═══════════════════ /halloween daily ═══════════════════
+daily-disabled: '{prefix}&cThe daily bonus is turned off.'
+daily-wait: '{prefix}&cYou can claim your next daily bonus in &f{time}&c.'
+daily-claimed: '{prefix}&7Daily bonus claimed! &#FF7518+{gained} &7Halloween points. &8(&f{points} &7total&8)'
+
+# ═══════════════════ shop ═══════════════════
+shop-disabled: '{prefix}&cThe shop is closed.'
+shop-balance-name: '&#FF7518&lYour points&8: &f{points}'
+shop-balance-lore:
+  - '&7Earn more by handing in'
+  - '&7carved pumpkins.'
+# Added under every item. {cost} price, {limit} max purchases,
+# {bought} how many you bought, {points} your points
+shop-item-footer:
+  - ''
+  - '&7Price&8: &#FF7518{cost} points'
+  - '&7Limit&8: &f{bought}&8/&f{limit}'
+  - ''
+  - '&eClick to buy'
+shop-bought: '{prefix}You bought {item} &7for &#FF7518{cost} &7points. &8(&f{points} &7left&8)'
+shop-not-enough: '{prefix}&cYou need &f{cost} &cpoints for {item}&c. You have &f{points}&c.'
+shop-limit: '{prefix}&cYou already bought {item} &c{limit} time(s).'
+
+# ═══════════════════ join reminder ═══════════════════
+join-reminder:
+  - ''
+  - '{prefix}&#FF7518&lHalloween is here! &7Hand in carved pumpkins with &#FF7518/halloween sell&7.'
+  - '{prefix}You have &#FF7518{points} &7points. Time left&8: &f{time_left}'
+  - ''
+
+# ═══════════════════ admin ═══════════════════
+admin-usage:
+  - '&8&m          &r &c&lHALLOWEEN ADMIN &8&m          '
+  - ' &c/halloween admin give <player> <points>'
+  - ' &c/halloween admin take <player> <points>'
+  - ' &c/halloween admin set <player> <points>'
+  - ' &c/halloween admin setdelivered <player> <pumpkins>'
+  - ' &c/halloween admin reset <player>'
+  - ' &c/halloween admin synckeys <player>'
+  - ' &c/halloween admin event <on|off>'
+  - ' &c/halloween admin reload'
+admin-reloaded: '{prefix}&aconfig.yml and messages.yml reloaded.'
+admin-event-on: '{prefix}&aThe event is now ON (the dates in config.yml still apply).'
+admin-event-off: '{prefix}&cThe event is now OFF.'
+admin-event-status: '{prefix}&7Event status&8: {status} &8(&7{time_left}&8)'
+admin-points-given: '{prefix}&aGave &f{amount} &apoints to &f{player}&a. They now have &f{points}&a.'
+admin-points-taken: '{prefix}&aTook &f{amount} &apoints from &f{player}&a. They now have &f{points}&a.'
+admin-points-set: '{prefix}&aSet the points of &f{player} &ato &f{amount}&a.'
+admin-delivered-set: '{prefix}&aSet the handed-in pumpkins of &f{player} &ato &f{amount}&a. Use synckeys to give keys that are due.'
+admin-reset: '{prefix}&aAll Halloween data of &f{player} &awas reset.'
+admin-synced: '{prefix}&aGave &f{amount} &amissing key(s) to &f{player}&a.'

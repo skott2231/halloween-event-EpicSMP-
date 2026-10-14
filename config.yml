@@ -1,0 +1,278 @@
+# ╔════════════════════════════════════════════════════════════════════╗
+# ║                                                                    ║
+# ║           🎃   H A L L O W E E N   E V E N T   🎃                   ║
+# ║                       config.yml  ·  v1.0.0                        ║
+# ║                                                                    ║
+# ╚════════════════════════════════════════════════════════════════════╝
+#
+#  HOW THE EVENT WORKS
+#   1. Players craft carved pumpkins and run  /halloween sell.
+#   2. A menu opens. They put their carved pumpkins in and click CONFIRM.
+#   3. Every pumpkin gives 1 Halloween point (spend them in /halloween shop).
+#   4. Every 250 pumpkins handed in gives 1 Halloween key
+#      (the command below runs in the console and gives the key).
+#
+#  EASY TO EDIT
+#   - This file   = numbers, rewards, commands, shop, dates
+#   - messages.yml = every text the players see
+#   - After editing run  /halloween admin reload  (no restart needed)
+#
+#  GOOD TO KNOW
+#   - Colors:    &6 and hex colors like &#FF7518 work everywhere.
+#   - Commands:  they run as the console. Write them WITHOUT the "/".
+#                %player% becomes the player's name.
+#   - "Points" can be spent. "Handed in" is a lifetime counter that
+#     only goes up. Keys and milestones use the lifetime counter, so
+#     spending points in the shop never costs you key progress.
+# ───────────────────────────────────────────────────────────────────
+
+
+# ═══════════════════════════════════════════════════════════════════
+#  1) EVENT DATES
+# ═══════════════════════════════════════════════════════════════════
+event:
+  # Format: yyyy-MM-dd HH:mm  (24 hour clock). Use '' for "no limit".
+  # Outside these dates /halloween sell, sellall and daily are closed.
+  start: '2026-10-01 00:00'
+  end: '2026-11-03 00:00'
+
+  # Time zone of the two dates above, for example UTC, Europe/Vienna,
+  # America/New_York.
+  timezone: 'UTC'
+
+  # After the end date players can still spend their points in the shop.
+  shop-open-after-end: true
+
+
+# ═══════════════════════════════════════════════════════════════════
+#  2) WHICH ITEMS COUNT
+# ═══════════════════════════════════════════════════════════════════
+pumpkins:
+  # ITEM: points you get for ONE item.
+  # Every item also counts as 1 "handed in" for keys and milestones.
+  # Item names: https://jd.papermc.io/paper/1.21.4/org/bukkit/Material.html
+  accepted:
+    CARVED_PUMPKIN: 1
+    # JACK_O_LANTERN: 2        # remove the '#' to accept these as well
+
+  # true  = renamed items or items with lore are NOT accepted.
+  #         This stops players from handing in special event items.
+  ignore-custom-items: true
+
+# Hand in all pumpkins from the inventory with one command: /halloween sellall
+sellall:
+  enabled: true
+
+
+# ═══════════════════════════════════════════════════════════════════
+#  3) KEY REWARD
+#     250 pumpkins handed in = 1 Halloween key
+# ═══════════════════════════════════════════════════════════════════
+key-reward:
+  enabled: true
+
+  # How many pumpkins for one key.
+  every: 250
+
+  # true  = a key for EVERY 250 pumpkins (250, 500, 750, ...)
+  # false = only ONE key for the first 250 pumpkins
+  repeat: true
+
+  # Maximum keys one player can earn in total. -1 = unlimited.
+  max-keys: -1
+
+  # Tell the whole server when someone earns a key?
+  broadcast: true
+
+  # The command(s) that give the key. Add more lines for more commands.
+  commands:
+    - 'keys give %player% halloween 1'
+
+
+# ═══════════════════════════════════════════════════════════════════
+#  4) MILESTONES  (personal bonus rewards)
+#     Triggered once per player when the lifetime "handed in" counter
+#     reaches the number. Add as many as you like.
+# ═══════════════════════════════════════════════════════════════════
+milestones:
+  enabled: true
+  list:
+    25:
+      message: '{prefix}&7Milestone &#FF7518{amount} pumpkins&7! You got &#FF751816 cookies&7.'
+      commands:
+        - 'give %player% minecraft:cookie 16'
+    100:
+      message: '{prefix}&7Milestone &#FF7518{amount} pumpkins&7! You got &#FF75188 golden apples&7.'
+      commands:
+        - 'give %player% minecraft:golden_apple 8'
+    500:
+      message: '{prefix}&7Milestone &#FF7518{amount} pumpkins&7! You got a &#FF7518Totem of Undying&7.'
+      broadcast: '{prefix}&#FF7518{player} &7handed in &#FF7518{amount} &7pumpkins!'
+      commands:
+        - 'give %player% minecraft:totem_of_undying 1'
+
+
+# ═══════════════════════════════════════════════════════════════════
+#  5) DAILY BONUS   (/halloween daily)
+# ═══════════════════════════════════════════════════════════════════
+daily:
+  enabled: true
+  points: 5
+  cooldown-hours: 20
+  # Extra commands on top of the points (optional).
+  commands: []
+
+
+# ═══════════════════════════════════════════════════════════════════
+#  6) SHOP   (/halloween shop)
+#     Players spend Halloween points here.
+#
+#     Each item:
+#       slot        position in the menu (rows x 9, first slot = 0)
+#       material    icon of the item in the menu
+#       name, lore  text of the icon
+#       amount      stack size of the icon
+#       glow        true = enchant shimmer
+#       cost        price in Halloween points
+#       limit       how often ONE player may buy it. -1 = unlimited
+#       commands    what the console runs (what the player receives)
+#       broadcast   optional server announcement ('' = none)
+# ═══════════════════════════════════════════════════════════════════
+shop:
+  enabled: true
+  title: '&#FF7518&lHalloween Shop'
+  rows: 3
+  # Empty slots get this item. '' = leave empty.
+  filler: BLACK_STAINED_GLASS_PANE
+
+  items:
+    candy:
+      slot: 11
+      material: COOKIE
+      name: '&#FF7518&lCandy Bag'
+      lore:
+        - '&7A big stack of cookies.'
+      amount: 1
+      glow: false
+      cost: 20
+      limit: -1
+      commands:
+        - 'give %player% minecraft:cookie 64'
+
+    golden_apples:
+      slot: 12
+      material: ENCHANTED_GOLDEN_APPLE
+      name: '&#FFD900&lEnchanted Golden Apples'
+      lore:
+        - '&7Two enchanted golden apples.'
+      amount: 2
+      glow: false
+      cost: 150
+      limit: 3
+      commands:
+        - 'give %player% minecraft:enchanted_golden_apple 2'
+
+    totem:
+      slot: 13
+      material: TOTEM_OF_UNDYING
+      name: '&#9B30FF&lSecond Life'
+      lore:
+        - '&7A Totem of Undying.'
+      amount: 1
+      glow: true
+      cost: 250
+      limit: 2
+      commands:
+        - 'give %player% minecraft:totem_of_undying 1'
+
+    pumpkins:
+      slot: 14
+      material: JACK_O_LANTERN
+      name: '&#FF7518&lSpooky Lights'
+      lore:
+        - '&7Two stacks of jack o''lanterns.'
+      amount: 1
+      glow: false
+      cost: 60
+      limit: -1
+      commands:
+        - 'give %player% minecraft:jack_o_lantern 64'
+        - 'give %player% minecraft:jack_o_lantern 64'
+
+    key:
+      slot: 15
+      material: TRIPWIRE_HOOK
+      name: '&#FF7518&lHalloween Key'
+      lore:
+        - '&7One key for the Halloween Crate.'
+      amount: 1
+      glow: true
+      cost: 400
+      limit: -1
+      commands:
+        - 'keys give %player% halloween 1'
+      broadcast: '{prefix}&#FF7518{player} &7bought a Halloween key in the shop!'
+
+
+# ═══════════════════════════════════════════════════════════════════
+#  7) COMMUNITY GOALS  (the whole server works together)
+#     Every pumpkin handed in by ANYONE counts. When a goal is reached
+#     the broadcast is sent and the commands run for EVERY player who
+#     is online at that moment.
+# ═══════════════════════════════════════════════════════════════════
+community-goal:
+  enabled: true
+  goals:
+    goal-1:
+      target: 2500
+      broadcast: '{prefix}&#FF7518&lCOMMUNITY GOAL &7- the server handed in &#FF7518{target} &7pumpkins! Everyone online gets a &#FF7518cookie stack&7!'
+      commands:
+        - 'give %player% minecraft:cookie 32'
+    goal-2:
+      target: 10000
+      broadcast: '{prefix}&#FF7518&lCOMMUNITY GOAL &7- &#FF7518{target} &7pumpkins! Everyone online gets a &#FF7518Halloween key&7!'
+      commands:
+        - 'keys give %player% halloween 1'
+
+
+# ═══════════════════════════════════════════════════════════════════
+#  8) EXTRAS
+# ═══════════════════════════════════════════════════════════════════
+
+# How many players /halloween top shows.
+top:
+  size: 10
+
+# A short reminder when a player joins while the event is running.
+join-reminder:
+  enabled: true
+  delay-seconds: 5
+
+# Sounds use Minecraft sound names (see the Minecraft wiki "Sounds.json").
+# '' = no sound.
+effects:
+  sounds:
+    sell: 'entity.experience_orb.pickup'
+    key: 'entity.player.levelup'
+    milestone: 'ui.toast.challenge_complete'
+    shop: 'entity.villager.yes'
+    error: 'entity.villager.no'
+    gui-open: 'block.ender_chest.open'
+  # Firework above the player who earns a key (harmless, no damage).
+  firework-on-key: true
+  # Big title on screen when a key is earned (texts in messages.yml).
+  title-on-key: true
+
+# Length of the progress bar in /halloween info.
+progress-bar:
+  length: 20
+
+
+# ═══════════════════════════════════════════════════════════════════
+#  9) STORAGE
+# ═══════════════════════════════════════════════════════════════════
+storage:
+  # Everything is stored in plugins/HalloweenEvent/data.yml.
+  # It is saved right after every hand-in, shop purchase and key,
+  # plus this automatic save every few minutes.
+  autosave-minutes: 5
